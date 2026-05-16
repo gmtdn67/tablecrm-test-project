@@ -3,8 +3,9 @@ import { getOrganizations } from "../api/api"
 
 export function useOrganizations(token: string) {
   return useQuery({
-    queryKey: ["warehouses"],
+    queryKey: ["organizations"],
     queryFn: () => getOrganizations(token),
     enabled: !!token,
+    staleTime: Infinity
   })
 }

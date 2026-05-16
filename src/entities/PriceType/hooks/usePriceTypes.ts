@@ -3,8 +3,9 @@ import { getPriceTypes } from "../api/api"
 
 export function usePriceTypes(token: string) {
   return useQuery({
-    queryKey: ["warehouses"],
+    queryKey: ["price_types"],
     queryFn: () => getPriceTypes(token),
     enabled: !!token,
+    staleTime: Infinity
   })
 }

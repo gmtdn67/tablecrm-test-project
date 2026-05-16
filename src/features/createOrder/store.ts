@@ -1,30 +1,35 @@
 import { create } from "zustand"
 import { Contragent } from "@/entities/Contragent/model/types/contragent"
 
+type DictionaryItem = {
+    id: number
+    name: string
+}
+
 type OrderStore = {
-    warehouseId: number | null
-    organizationId: number | null
-    payboxId: number | null
-    priceTypeId: number | null
+    warehouse: DictionaryItem | null
+    organization: DictionaryItem | null
+    paybox: DictionaryItem | null
+    priceType: DictionaryItem | null
     contragent: Contragent | null
 
-    setWarehouseId: (id: number) => void
-    setOrganizationId: (id: number) => void
-    setPayboxId: (id: number) => void
-    setPriceTypeId: (id: number) => void
+    setWarehouse: (id: DictionaryItem | null) => void
+    setOrganization: (id: DictionaryItem | null) => void
+    setPaybox: (id: DictionaryItem | null) => void
+    setPriceType: (id: DictionaryItem | null) => void
     setContragent: (contragent: Contragent | null) => void
 }
 
 export const useOrderStore = create<OrderStore>((set) => ({
-    warehouseId: null,
-    organizationId:  null,
-    payboxId: null,
-    priceTypeId: null,
+    warehouse: null,
+    organization:  null,
+    paybox: null,
+    priceType: null,
     contragent: null,
 
-    setWarehouseId: (id) => set({warehouseId: id}),
-    setOrganizationId: (id) => set({organizationId: id}),
-    setPayboxId: (id) => set({payboxId: id}),
-    setPriceTypeId: (id) => set({priceTypeId: id}),
+    setWarehouse: (warehouse) => set({warehouse}),
+    setOrganization: (organization) => set({organization}),
+    setPaybox: (paybox) => set({paybox}),
+    setPriceType: (priceType) => set({priceType}),
     setContragent: (contragent) => set({contragent}),
 }))

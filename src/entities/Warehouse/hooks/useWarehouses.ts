@@ -6,5 +6,6 @@ export function useWarehouses(token: string) {
     queryKey: ["warehouses"],
     queryFn: () => getWarehouses(token),
     enabled: !!token,
+    staleTime: Infinity
   })
 }
