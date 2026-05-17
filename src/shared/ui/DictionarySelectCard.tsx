@@ -1,37 +1,58 @@
-import { useMemo, useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./shadcn/card"
-import { Input } from "./shadcn/input"
+"use client"
+
+import { useState } from "react"
+import { Check, ChevronsUpDown } from "lucide-react"
+import { cn } from "@/shared/lib/utils"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "./shadcn/card"
+import { Button } from "./shadcn/button"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "./shadcn/popover"
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "./shadcn/command"
 
 type Item = {
-    id: number, 
-    name: string
+  id: number
+  name: string
 }
 
 type Props = {
-    title: string
-    description: string
-    items: Item[]
-    value: Item | null
-    onSelect: (item: Item) => void
-    placeholder?: string
+  title: string
+  description: string
+
+  items?: Item[]
+
+  value: Item | null
+
+  onSelect: (item: Item) => void
+
+  placeholder?: string
 }
+
 export function DictionarySelectCard({
-    title,
+  title,
   description,
-  items,
+  items = [],
   value,
   onSelect,
   placeholder,
 }: Props) {
-    const [search, setSearch] = useState("")
-
-  const filteredItems = useMemo(() => {
-    return items.filter((item) =>
-      item.name
-        .toLowerCase()
-        .includes(search.toLowerCase())
-    )
-  }, [items, search])
+  const [open, setOpen] =
+    useState(false)
 
   return (
     <Card>
@@ -45,47 +66,84 @@ export function DictionarySelectCard({
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="space-y-3">
-        <Input
-          placeholder={
-            placeholder || "Поиск"
-          }
-          value={
-            value?.name || search
-          }
-          onChange={(e) => {
-            setSearch(e.target.value)
-          }}
-        />
+      <CardContent>
+        <Popover
+          open={open}
+          onOpenChange={setOpen}
+        >
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              role="combobox"
+              aria-expanded={open}
+              className="
+                w-full justify-between
+                font-normal
+              "
+            >
+              {value
+                ? value.name
+                : placeholder ||
+                  "Выберите"}
 
-        {!value &&
-          filteredItems.length > 0 && (
-            <div className="overflow-hidden rounded-xl border">
-              <div className="max-h-[240px] overflow-y-auto">
-                {filteredItems.map(
-                  (item) => (
-                    <button
+              <ChevronsUpDown
+                className="
+                  ml-2 h-4 w-4
+                  shrink-0 opacity-50
+                "
+              />
+            </Button>
+          </PopoverTrigger>
+
+          <PopoverContent
+            className="
+              w-[var(--radix-popover-trigger-width)]
+              p-0
+            "
+            align="start"
+          >
+            <Command>
+              <CommandInput
+                placeholder={
+                  placeholder ||
+                  "Поиск..."
+                }
+              />
+
+              <CommandList className="max-h-[240px]">
+                <CommandEmpty>
+                  Ничего не найдено
+                </CommandEmpty>
+
+                <CommandGroup>
+                  {items.map((item) => (
+                    <CommandItem
                       key={item.id}
-                      type="button"
-                      onClick={() => {
+                      value={item.name}
+                      onSelect={() => {
                         onSelect(item)
 
-                        setSearch("")
+                        setOpen(false)
                       }}
-                      className="
-                        flex w-full items-center
-                        border-b p-3 text-left
-                        transition-colors hover:bg-muted
-                        last:border-b-0
-                      "
                     >
+                      <Check
+                        className={cn(
+                          "mr-2 h-4 w-4",
+                          value?.id ===
+                            item.id
+                            ? "opacity-100"
+                            : "opacity-0"
+                        )}
+                      />
+
                       {item.name}
-                    </button>
-                  )
-                )}
-              </div>
-            </div>
-          )}
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              </CommandList>
+            </Command>
+          </PopoverContent>
+        </Popover>
       </CardContent>
     </Card>
   )

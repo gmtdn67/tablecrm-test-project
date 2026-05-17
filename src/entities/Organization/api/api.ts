@@ -5,6 +5,11 @@ export async function getOrganizations(token: string) {
     `/organizations?token=${token}`
   )
 
-  return response.data
+    return response.data.result.map(
+      (item: any) => ({
+        id: item.id,
+        name: item.short_name,
+      })
+  )
 }
 

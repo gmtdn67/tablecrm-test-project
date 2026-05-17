@@ -7,7 +7,7 @@ import { DictionarySelectCard } from "@/shared/ui/DictionarySelectCard"
 
 export function OrganizationSelect() {
 
-  const { token } = useAuthStore(state => state.token)
+  const token = useAuthStore(state => state.token)
   const {
     data: organizations = [],
   } = useOrganizations(token)

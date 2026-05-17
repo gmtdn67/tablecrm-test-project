@@ -10,8 +10,7 @@ export async function GET(req: NextRequest) {
         )
 
         const data = await response.json()
-
-        return NextResponse.json(data)
+        return NextResponse.json(data.result)
     } catch (error) {
         return NextResponse.json(
             { error: "Internal error" },
