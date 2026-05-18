@@ -21,7 +21,6 @@ export function PayboxSelect() {
       (state) =>
         state.setPaybox
     )
-    console.log(payboxes)
 
   return (
     <DictionarySelectCard

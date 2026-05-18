@@ -1,5 +1,7 @@
 import { create } from "zustand"
 import { Contragent } from "@/entities/Contragent/model/types/contragent"
+import { CartItem } from "./model/types"
+import { Product } from "@/entities/Product/model/types/types"
 
 type DictionaryItem = {
     id: number
@@ -12,12 +14,18 @@ type OrderStore = {
     paybox: DictionaryItem | null
     priceType: DictionaryItem | null
     contragent: Contragent | null
+    cart: CartItem[]
 
     setWarehouse: (id: DictionaryItem | null) => void
     setOrganization: (id: DictionaryItem | null) => void
     setPaybox: (id: DictionaryItem | null) => void
     setPriceType: (id: DictionaryItem | null) => void
     setContragent: (contragent: Contragent | null) => void
+
+    addToCart: (product: Product) => void
+    removeFromCart: (productId: number) => void
+    increaseQuantity: (productId: number) => void
+    decreaseQuantity: (productId: number) => void
 }
 
 export const useOrderStore = create<OrderStore>((set) => ({
@@ -26,10 +34,43 @@ export const useOrderStore = create<OrderStore>((set) => ({
     paybox: null,
     priceType: null,
     contragent: null,
+    cart: [],
 
     setWarehouse: (warehouse) => set({warehouse}),
     setOrganization: (organization) => set({organization}),
     setPaybox: (paybox) => set({paybox}),
     setPriceType: (priceType) => set({priceType}),
     setContragent: (contragent) => set({contragent}),
+    addToCart: (product) =>
+        set((state) => {
+        const existing =
+        state.cart.find(
+            (item) =>
+            item.product.id === product.id
+        )
+
+        if (existing) {
+        return {
+            cart: state.cart.map((item) =>
+            item.product.id === product.id
+                ? {
+                    ...item,
+                    quantity:
+                    item.quantity + 1,
+                }
+                : item
+            ),
+        }
+        }
+
+        return {
+        cart: [
+            ...state.cart,
+            {
+            product,
+            quantity: 1,
+            },
+        ],
+        }
+    }),
 }))

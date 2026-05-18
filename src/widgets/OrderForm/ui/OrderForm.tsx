@@ -3,6 +3,7 @@ import { OrganizationSelect } from "@/features/organizationSelect/ui/Organizatio
 import { PayboxSelect } from "@/features/payboxSelect/ui/PayboxSelect";
 import { PriceTypeSelect } from "@/features/pricetypeSelect/ui/PriceTypeSelect";
 import { WarehouseSelect } from "@/features/warehouseSelect/ui/WarehouseSelect";
+import { ProductsWidget } from "@/widgets/ProductsList/ui/ProductsWidget";
 
 export function OrderForm() {
     return (
@@ -12,6 +13,7 @@ export function OrderForm() {
             <PayboxSelect />
             <WarehouseSelect />
             <PriceTypeSelect />
+            <ProductsWidget />
         </div>
     )
 }
