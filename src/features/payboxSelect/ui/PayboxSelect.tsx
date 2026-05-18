@@ -21,12 +21,13 @@ export function PayboxSelect() {
       (state) =>
         state.setPaybox
     )
+    console.log(payboxes)
 
   return (
     <DictionarySelectCard
         title="4. Счет"
         description="Выберите счет"
-        items={payboxes}
+        items={payboxes || []}
         value={paybox}
         onSelect={setPaybox}
         placeholder="Поиск счета"

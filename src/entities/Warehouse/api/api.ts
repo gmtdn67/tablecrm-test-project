@@ -5,5 +5,5 @@ export async function getWarehouses(token: string) {
     `/warehouses?token=${token}`
   )
 
-  return response.data
+  return response.data.result
 }

@@ -83,8 +83,8 @@ export function DictionarySelectCard({
             >
               {value
                 ? value.name
-                : placeholder ||
-                  "Выберите"}
+                : placeholder 
+              }
 
               <ChevronsUpDown
                 className="
@@ -116,7 +116,7 @@ export function DictionarySelectCard({
                 </CommandEmpty>
 
                 <CommandGroup>
-                  {items.map((item) => (
+                  {Array.isArray(items) && items.map((item) => (
                     <CommandItem
                       key={item.id}
                       value={item.name}

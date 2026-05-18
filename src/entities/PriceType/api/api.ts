@@ -5,5 +5,5 @@ export async function getPriceTypes(token: string) {
     `/price_types?token=${token}`
   )
 
-  return response.data
+  return response.data.result
 }

@@ -27,7 +27,7 @@ export function OrganizationSelect() {
     <DictionarySelectCard
         title="3. Организация"
         description="Выберите организацию"
-        items={organizations}
+        items={organizations || []}
         value={organization}
         onSelect={setOrganization}
         placeholder="Поиск организации"

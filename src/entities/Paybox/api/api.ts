@@ -5,5 +5,5 @@ export async function getPayboxes(token: string) {
     `/payboxes?token=${token}`
   )
 
-  return response.data
+  return response.data.result
 }
