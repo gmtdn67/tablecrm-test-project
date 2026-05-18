@@ -26,6 +26,7 @@ type OrderStore = {
     removeFromCart: (productId: number) => void
     increaseQuantity: (productId: number) => void
     decreaseQuantity: (productId: number) => void
+    clearCart: () => void
 }
 
 export const useOrderStore = create<OrderStore>((set) => ({
@@ -43,34 +44,97 @@ export const useOrderStore = create<OrderStore>((set) => ({
     setContragent: (contragent) => set({contragent}),
     addToCart: (product) =>
         set((state) => {
-        const existing =
-        state.cart.find(
-            (item) =>
-            item.product.id === product.id
-        )
+          const existing =
+            state.cart.find(
+              (item) =>
+                item.product.id ===
+                product.id
+            )
 
-        if (existing) {
-        return {
-            cart: state.cart.map((item) =>
-            item.product.id === product.id
+          if (existing) {
+            return {
+              cart:
+                state.cart.map(
+                  (item) =>
+                    item.product
+                      .id ===
+                    product.id
+                      ? {
+                          ...item,
+                          quantity:
+                            item.quantity +
+                            1,
+                        }
+                      : item
+                ),
+            }
+          }
+
+          return {
+            cart: [
+              ...state.cart,
+              {
+                product,
+                quantity: 1,
+              },
+            ],
+          }
+        }),
+
+      removeFromCart: (
+        productId
+      ) =>
+        set((state) => ({
+          cart: state.cart.filter(
+            (item) =>
+              item.product.id !==
+              productId
+          ),
+        })),
+
+      increaseQuantity: (
+        productId
+      ) =>
+        set((state) => ({
+          cart: state.cart.map(
+            (item) =>
+              item.product.id ===
+              productId
                 ? {
                     ...item,
                     quantity:
-                    item.quantity + 1,
-                }
+                      item.quantity +
+                      1,
+                  }
                 : item
-            ),
-        }
-        }
+          ),
+        })),
 
-        return {
-        cart: [
-            ...state.cart,
-            {
-            product,
-            quantity: 1,
-            },
-        ],
-        }
-    }),
-}))
+      decreaseQuantity: (
+        productId
+      ) =>
+        set((state) => ({
+          cart: state.cart
+            .map((item) =>
+              item.product.id ===
+              productId
+                ? {
+                    ...item,
+                    quantity:
+                      item.quantity -
+                      1,
+                  }
+                : item
+            )
+            .filter(
+              (item) =>
+                item.quantity > 0
+            ),
+        })),
+
+      clearCart: () =>
+        set({
+          cart: [],
+        }),
+    })
+)

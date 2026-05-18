@@ -4,6 +4,7 @@ import { PayboxSelect } from "@/features/payboxSelect/ui/PayboxSelect";
 import { PriceTypeSelect } from "@/features/pricetypeSelect/ui/PriceTypeSelect";
 import { WarehouseSelect } from "@/features/warehouseSelect/ui/WarehouseSelect";
 import { ProductsWidget } from "@/widgets/ProductsList/ui/ProductsWidget";
+import { StickyCartWidget } from "@/widgets/StickyCartWidget/ui/StickyCardWidget";
 
 export function OrderForm() {
     return (
@@ -14,6 +15,7 @@ export function OrderForm() {
             <WarehouseSelect />
             <PriceTypeSelect />
             <ProductsWidget />
+            <StickyCartWidget />
         </div>
     )
 }
