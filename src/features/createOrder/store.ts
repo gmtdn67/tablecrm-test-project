@@ -26,7 +26,7 @@ type OrderStore = {
     removeFromCart: (productId: number) => void
     increaseQuantity: (productId: number) => void
     decreaseQuantity: (productId: number) => void
-    clearCart: () => void
+    changePrice: (productId: number, price: number) => void
 }
 
 export const useOrderStore = create<OrderStore>((set) => ({
@@ -42,7 +42,7 @@ export const useOrderStore = create<OrderStore>((set) => ({
     setPaybox: (paybox) => set({paybox}),
     setPriceType: (priceType) => set({priceType}),
     setContragent: (contragent) => set({contragent}),
-    addToCart: (product) =>
+          addToCart: (product) =>
         set((state) => {
           const existing =
             state.cart.find(
@@ -76,6 +76,8 @@ export const useOrderStore = create<OrderStore>((set) => ({
               {
                 product,
                 quantity: 1,
+                price:
+                  product.price,
               },
             ],
           }
@@ -132,9 +134,21 @@ export const useOrderStore = create<OrderStore>((set) => ({
             ),
         })),
 
-      clearCart: () =>
-        set({
-          cart: [],
-        }),
+      changePrice: (
+        productId,
+        price
+      ) =>
+        set((state) => ({
+          cart: state.cart.map(
+            (item) =>
+              item.product.id ===
+              productId
+                ? {
+                    ...item,
+                    price,
+                  }
+                : item
+          ),
+        })),
     })
 )
