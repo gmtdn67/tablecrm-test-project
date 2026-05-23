@@ -19,7 +19,10 @@ export default function RootLayout({
       lang="ru"
     >
       <body>
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          {children}
+          <Toaster />
+        </QueryProvider>
       </body>
     </html>
   );
