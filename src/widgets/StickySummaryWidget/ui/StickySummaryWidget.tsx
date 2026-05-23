@@ -20,8 +20,8 @@ export function StickySummaryWidget() {
       return cart.reduce(
         (acc, item) =>
           acc +
-          item.price *
-            item.quantity,
+          Number((item.price) || 0) *
+          (Number(item.quantity) || 0),
         0
       )
     }, [cart])
@@ -57,7 +57,7 @@ export function StickySummaryWidget() {
               text-2xl font-bold
             "
           >
-            {total} ₽
+            {total ?? '-'} ₽
           </p>
         </div>
 

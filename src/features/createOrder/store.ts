@@ -42,7 +42,7 @@ export const useOrderStore = create<OrderStore>((set) => ({
     setPaybox: (paybox) => set({paybox}),
     setPriceType: (priceType) => set({priceType}),
     setContragent: (contragent) => set({contragent}),
-          addToCart: (product) =>
+    addToCart: (product) =>
         set((state) => {
           const existing =
             state.cart.find(
@@ -145,7 +145,7 @@ export const useOrderStore = create<OrderStore>((set) => ({
               productId
                 ? {
                     ...item,
-                    price,
+                    price: Number(price) || 0,
                   }
                 : item
           ),

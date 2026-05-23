@@ -44,8 +44,8 @@ export function CartItemCard({
   onPriceChange,
 }: Props) {
   const subtotal =
-    item.price *
-    item.quantity
+    (Number(item.price) || 0) *
+    (Number(item.quantity) || 0)
 
   return (
     <Card className="p-3">
@@ -106,7 +106,7 @@ export function CartItemCard({
           <Input
             type="number"
             min={0}
-            value={item.price}
+            value={String(item.price ?? "")}
             onChange={(e) =>
               onPriceChange(
                 Number(

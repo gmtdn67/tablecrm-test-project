@@ -146,6 +146,9 @@ export function ProductsWidget() {
               className="
                 max-h-[50vh]
                 overflow-y-auto
+                rounded-md border p-4
+                text-sm
+                text-muted-foreground
               "
             >
               <div

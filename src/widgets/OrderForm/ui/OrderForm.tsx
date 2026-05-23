@@ -5,8 +5,6 @@ import { PriceTypeSelect } from "@/features/pricetypeSelect/ui/PriceTypeSelect";
 import { WarehouseSelect } from "@/features/warehouseSelect/ui/WarehouseSelect";
 import { CartWidget } from "@/widgets/CartWidget/ui/CartWidget";
 import { ProductsWidget } from "@/widgets/ProductsList/ui/ProductsWidget";
-import { StickySummaryWidget } from "@/widgets/StickySummaryWidget/ui/StickySummaryWidget";
-
 
 export function OrderForm() {
     return (
@@ -18,7 +16,6 @@ export function OrderForm() {
             <PriceTypeSelect />
             <ProductsWidget />
             <CartWidget />
-            <StickySummaryWidget />
         </div>
     )
 }
