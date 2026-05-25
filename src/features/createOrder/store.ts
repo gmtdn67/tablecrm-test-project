@@ -5,28 +5,43 @@ import { Product } from "@/entities/Product/model/types/types"
 
 type DictionaryItem = {
     id: number
-    name: string
+    name?: string
+    short_name?: string
 }
 
+type Contragent = {
+  id: number
+  name: string
+  phone: string
+  loyality_card_id?: number
+}
+
+type CartItem = {
+  product: Product
+  quantity: number
+  price: number
+}
+
+
 type OrderStore = {
-    warehouse: DictionaryItem | null
     organization: DictionaryItem | null
+    warehouse: DictionaryItem | null
     paybox: DictionaryItem | null
     priceType: DictionaryItem | null
     contragent: Contragent | null
     cart: CartItem[]
 
-    setWarehouse: (id: DictionaryItem | null) => void
-    setOrganization: (id: DictionaryItem | null) => void
-    setPaybox: (id: DictionaryItem | null) => void
-    setPriceType: (id: DictionaryItem | null) => void
-    setContragent: (contragent: Contragent | null) => void
-
+    setOrganization: (item: DictionaryItem) => void
+    setWarehouse: (item: DictionaryItem) => void
+    setPaybox: (item: DictionaryItem) => void
+    setPriceType: (item: DictionaryItem) => void
+    setContragent: (item: Contragent) => void
+    
     addToCart: (product: Product) => void
-    removeFromCart: (productId: number) => void
     increaseQuantity: (productId: number) => void
     decreaseQuantity: (productId: number) => void
     changePrice: (productId: number, price: number) => void
+    removeFromCart: (productId: number) => void
 }
 
 export const useOrderStore = create<OrderStore>((set) => ({
@@ -42,7 +57,10 @@ export const useOrderStore = create<OrderStore>((set) => ({
     setPaybox: (paybox) => set({paybox}),
     setPriceType: (priceType) => set({priceType}),
     setContragent: (contragent) => set({contragent}),
-    addToCart: (product) =>
+   
+    addToCart: (
+        product
+      ) =>
         set((state) => {
           const existing =
             state.cart.find(
@@ -61,6 +79,7 @@ export const useOrderStore = create<OrderStore>((set) => ({
                     product.id
                       ? {
                           ...item,
+
                           quantity:
                             item.quantity +
                             1,
@@ -73,26 +92,20 @@ export const useOrderStore = create<OrderStore>((set) => ({
           return {
             cart: [
               ...state.cart,
+
               {
                 product,
+
                 quantity: 1,
+
                 price:
-                  product.price,
+                  Number(
+                    product.price
+                  ) || 0,
               },
             ],
           }
         }),
-
-      removeFromCart: (
-        productId
-      ) =>
-        set((state) => ({
-          cart: state.cart.filter(
-            (item) =>
-              item.product.id !==
-              productId
-          ),
-        })),
 
       increaseQuantity: (
         productId
@@ -104,6 +117,7 @@ export const useOrderStore = create<OrderStore>((set) => ({
               productId
                 ? {
                     ...item,
+
                     quantity:
                       item.quantity +
                       1,
@@ -122,6 +136,7 @@ export const useOrderStore = create<OrderStore>((set) => ({
               productId
                 ? {
                     ...item,
+
                     quantity:
                       item.quantity -
                       1,
@@ -145,9 +160,24 @@ export const useOrderStore = create<OrderStore>((set) => ({
               productId
                 ? {
                     ...item,
-                    price: Number(price) || 0,
+
+                    price:
+                      Number(
+                        price
+                      ) || 0,
                   }
                 : item
+          ),
+        })),
+
+      removeFromCart: (
+        productId
+      ) =>
+        set((state) => ({
+          cart: state.cart.filter(
+            (item) =>
+              item.product.id !==
+              productId
           ),
         })),
     })

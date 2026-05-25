@@ -12,7 +12,6 @@ export async function createSaleRequest(
   const response =
     await axios.post(
       `/api/docs_sales?token=${token}`,
-
       payload
     )
 

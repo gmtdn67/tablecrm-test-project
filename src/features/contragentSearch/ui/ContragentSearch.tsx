@@ -8,6 +8,7 @@ import { Input } from "@/shared/ui/shadcn/input"
 import { useAuthStore } from "@/features/authByToken/store"
 import { useContragentSearch } from "@/entities/Contragent/hooks/useContragentSearch"
 import { normalizePhone } from "@/shared/lib/normalizePhone"
+import { useOrderStore } from "@/features/createOrder/store"
 
 
 type Contragent = {
@@ -23,8 +24,17 @@ export function ContragentSearch() {
 
   const [search, setSearch] = useState("+7")
 
-  const [selected, setSelected] =
-    useState<Contragent | null>(null)
+/*   const [selected, setSelected] =
+    useState<Contragent | null>(null) */
+
+  const contragent = useOrderStore(
+    (state) => state.contragent
+  )
+
+  const setContragent = useOrderStore(
+    (state) =>
+      state.setContragent
+  )
 
   const debouncedSearch =
     useDebounce(search, 450)
@@ -39,7 +49,7 @@ export function ContragentSearch() {
 
   const showDropdown =
     debouncedSearch.length >= 3 &&
-    !selected
+    !contragent
 
   return (
     <Card>
@@ -57,12 +67,12 @@ export function ContragentSearch() {
           <Input
             placeholder="+7хххххххххх"
             value={
-              selected
-                ? selected.phone
+              contragent
+                ? contragent.phone
                 : search
             }
             onChange={(e) => {
-              setSelected(null)
+              setContragent(null)
 
               const normalized =
                 normalizePhone(e.target.value)
@@ -91,7 +101,7 @@ export function ContragentSearch() {
                     key={contragent.id}
                     type="button"
                     onClick={() => {
-                      setSelected(
+                      setContragent(
                         contragent
                       )
 
