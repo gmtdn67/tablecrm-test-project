@@ -65,7 +65,7 @@ export function StickySummaryWidget() {
         </div>
         <div className="flex justify-between gap-5">
           <Button 
-            className="w-30"
+            className="w-30 cursor-pointer"
             disabled={isOrderInvalid}
             onClick={() =>
               createOrder({
@@ -83,7 +83,7 @@ export function StickySummaryWidget() {
           </Button>
 
           <Button
-            className="w-30"
+            className="w-40 hover:bg-gray-200 cursor-pointer"
             variant="secondary"
             disabled={isOrderInvalid}
             onClick={() =>
@@ -98,7 +98,7 @@ export function StickySummaryWidget() {
               })
             }
           >
-            Провести
+            Создать и провести
           </Button>
         </div>
       </div>
