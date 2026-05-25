@@ -1,11 +1,9 @@
 import { create } from "zustand"
-import { Contragent } from "@/entities/Contragent/model/types/contragent"
-import { CartItem } from "./model/types"
 import { Product } from "@/entities/Product/model/types/types"
 
 type DictionaryItem = {
     id: number
-    name?: string
+    name: string
     short_name?: string
 }
 
@@ -31,11 +29,11 @@ type OrderStore = {
     contragent: Contragent | null
     cart: CartItem[]
 
-    setOrganization: (item: DictionaryItem) => void
-    setWarehouse: (item: DictionaryItem) => void
-    setPaybox: (item: DictionaryItem) => void
-    setPriceType: (item: DictionaryItem) => void
-    setContragent: (item: Contragent) => void
+    setOrganization: (item: DictionaryItem | null) => void
+    setWarehouse: (item: DictionaryItem | null) => void
+    setPaybox: (item: DictionaryItem | null) => void
+    setPriceType: (item: DictionaryItem | null) => void
+    setContragent: (item: Contragent | null) => void
     
     addToCart: (product: Product) => void
     increaseQuantity: (productId: number) => void

@@ -27,7 +27,7 @@ import {
 
 import { Input }
 from "@/shared/ui/shadcn/input"
-
+import { Product } from "@/entities/Product/model/types/types"
 import { ProductCard }
 from "@/shared/ui/ProductCard"
 
@@ -55,7 +55,7 @@ export function ProductsWidget() {
       }
 
       return products.filter(
-        (product) =>
+        (product: Product) =>
           product.name
             .toLowerCase()
             .includes(

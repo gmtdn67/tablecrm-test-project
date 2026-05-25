@@ -1,10 +1,12 @@
+import { Organization } from "../model/types/organization";
+
 export function normalizeOrganization(
-  item: unknown
+  item: Organization
 ) {
     if (item) {
         return {
             id: item.id,
-            name: item.short_name,
+            name: item.shortName,
         }
 }
 }
