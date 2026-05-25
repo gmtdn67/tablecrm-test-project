@@ -1,19 +1,22 @@
 "use client"
 
-import { useMemo }
-from "react"
-
-import { useOrderStore }
-from "@/features/createOrder/store"
-
-import { Button }
-from "@/shared/ui/shadcn/button"
+import { useMemo } from "react"
+import { useOrderStore } from "@/features/createOrder/store"
+import { Button } from "@/shared/ui/shadcn/button"
+import { useAuthStore } from "@/features/authByToken/store"
+import { createOrder } from "@/features/createOrder/lib/createOrder"
 
 export function StickySummaryWidget() {
-  const cart =
-    useOrderStore(
-      (state) => state.cart
-    )
+  const {cart, organization, warehouse, paybox, contragent} = useOrderStore()
+
+  const token = useAuthStore((state) => state.token)
+
+  const isOrderInvalid =
+    !organization ||
+    !warehouse ||
+    !paybox ||
+    !contragent ||
+    cart.length === 0
 
   const total =
     useMemo(() => {
@@ -60,14 +63,44 @@ export function StickySummaryWidget() {
             {total ?? '-'} ₽
           </p>
         </div>
+        <div className="flex justify-between gap-5">
+          <Button 
+            className="w-30"
+            disabled={isOrderInvalid}
+            onClick={() =>
+              createOrder({
+                token,
+                cart,
+                organization,
+                warehouse,
+                paybox,
+                contragent,
+                status: false,
+              })
+            }
+          >
+            Создать
+          </Button>
 
-        <Button
-          disabled={
-            cart.length === 0
-          }
-        >
-          Создать продажу
-        </Button>
+          <Button
+            className="w-30"
+            variant="secondary"
+            disabled={isOrderInvalid}
+            onClick={() =>
+              createOrder({
+                token,
+                cart,
+                organization,
+                warehouse,
+                paybox,
+                contragent,
+                status: true,
+              })
+            }
+          >
+            Провести
+          </Button>
+        </div>
       </div>
     </div>
   )
