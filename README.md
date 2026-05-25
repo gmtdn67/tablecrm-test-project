@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TableCRM Mobile Order
 
-## Getting Started
+Мобильное web-приложение для оформления заказов и продаж через API TableCRM.
 
-First, run the development server:
+Тестовое задание на позицию **React / Next.js разработчика** с акцентом на:
+
+- Mobile-first UX
+- Production-like архитектуру
+- Производительность и масштабируемость
+- Чистую frontend-архитектуру
+
+---
+
+## 🚀 Стек
+
+### Core
+- **Next.js 16** (App Router)
+- **React 19**
+- **TypeScript**
+- **Zustand**
+- **Axios**
+
+### UI
+- **shadcn/ui**
+- **TailwindCSS**
+- **Lucide Icons**
+- **Sonner**
+
+### Architecture
+- **FSD Light** (Feature-Sliced Design)
+- Reusable widgets & components
+- API proxy routes
+- Centralized business state
+
+---
+
+## 📱 Возможности
+
+- **Авторизация по токену кассы**
+  - Подключение к кассе
+  - Preload справочников
+  - Loading / Success / Error состояния
+
+- **Поиск клиента**
+  - Поиск по телефону
+  - Debounce запросов
+  - Мобильно-оптимизированный dropdown
+
+- **Выбор параметров продажи**
+  - Организация
+  - Склад
+  - Счёт
+  - Тип цен
+
+- **Работа с товарами**
+  - Виртуализированный список
+  - Быстрое добавление в корзину
+  - Изменение количества и цены
+  - Удаление товаров
+
+- **Корзина**
+  - Динамический расчёт стоимости
+  - Редактирование позиций
+  - Sticky summary
+
+- **Создание продажи**
+  - Формирование и отправка заказа
+  - Создание + проведение продажи
+
+---
+
+## 🧠 Архитектура
+
+Проект построен по принципам **FSD Light** (Feature-Sliced Design):
+src/
+├── app/
+├── entities/           # Бизнес-сущности (Product, Contragent и т.д.)
+├── features/           # Пользовательские сценарии
+├── widgets/            # Крупные UI-блоки
+├── shared/             # Переиспользуемые ресурсы
+text### Основные слои
+
+- **entities** — Product, Organization, Warehouse, Contragent и др.
+- **features** — authByToken, contragentSearch, createOrder, organizationSelect и т.д.
+- **widgets** — OrderForm, ProductsWidget, CartWidget, StickySummaryWidget
+- **shared** — ui, api, hooks, utils
+
+---
+
+## ⚡ Оптимизации производительности
+
+- Debounced поиск
+- Виртуализация списка товаров
+- Memoized селекторы
+- Параллельная предзагрузка данных
+- Оптимизированные подписки Zustand
+- API Proxy через Next.js Route Handlers
+
+---
+
+## 📦 Установка и запуск
 
 ```bash
+# 1. Клонировать репозиторий
+git clone <repo-url>
+
+# 2. Установить зависимости
+npm install
+
+# 3. Запустить разработку
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Открыть: http://localhost:3000
+Сборка
+Bashnpm run build
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🌐 Совместимость с хостингом
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Vercel
+Netlify
+Docker
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Разработано с акцентом на мобильный UX, чистую архитектуру и production-ready подход.
