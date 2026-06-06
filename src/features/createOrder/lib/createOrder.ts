@@ -1,19 +1,20 @@
 import { toast }
 from "sonner"
 
-import { buildCreateSalePayload }
+import { buildCreateSalePayload, Contragent, EntityWithId }
 from "./buildCreateSalePayload"
 
 import { createSaleRequest }
 from "../api/createSale"
+import { CartItem } from "../model/types"
 
 type Params = {
   token: string
-  cart: any[]
-  organization: any
-  warehouse: any
-  paybox: any
-  contragent: any
+  cart: CartItem[]
+  organization: EntityWithId
+  warehouse: EntityWithId
+  paybox: EntityWithId
+  contragent: Contragent
   status: boolean
 }
 

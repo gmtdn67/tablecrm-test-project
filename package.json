@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
@@ -35,6 +36,7 @@
     "zustand": "^5.0.13"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@tailwindcss/postcss": "^4.3.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -42,10 +44,14 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.0.1",
-    "eslint": "^9",
+    "eslint": "^9.39.4",
     "eslint-config-next": "16.2.6",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^17.6.0",
+    "jiti": "^2.7.0",
     "jsdom": "^29.1.1",
     "tailwindcss": "^4.3.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "typescript-eslint": "^8.60.1"
   }
 }

@@ -1,12 +1,20 @@
 import { CartItem }
 from "../model/types"
 
+export interface EntityWithId {
+  id: number;
+}
+
+export interface Contragent extends EntityWithId {
+  loyality_card_id?: number | null
+}
+
 type Params = {
   cart: CartItem[]
-  organization: any
-  warehouse: any
-  paybox: any
-  contragent: any
+  organization: EntityWithId
+  warehouse: EntityWithId
+  paybox: EntityWithId
+  contragent: Contragent
   status: boolean
 }
 

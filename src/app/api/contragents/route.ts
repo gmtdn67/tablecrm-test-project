@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from "next/server"
 
+interface Customer {
+  id?: string | number;
+  name?: string;
+  phone?: string;
+}
+
 export async function GET(req: NextRequest) {
   try {
     const token =
@@ -31,7 +37,7 @@ export async function GET(req: NextRequest) {
     const normalized = phone.replace(/\D/g, "")
 
     const filtered = data.filter(
-      (customer: any) => {
+      (customer: Customer) => {
         const phone =
           customer.phone?.replace(/\D/g, "") || ""
 
