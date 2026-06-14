@@ -36,7 +36,8 @@ export async function GET(req: NextRequest) {
 
     const normalized = phone.replace(/\D/g, "")
 
-    const filtered = data.filter(
+    
+    const filtered = data.result.filter(
       (customer: Customer) => {
         const phone =
           customer.phone?.replace(/\D/g, "") || ""

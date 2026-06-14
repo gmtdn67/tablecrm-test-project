@@ -11,6 +11,6 @@ export async function searchContragents(token: string, phone: string) {
   const response = await axiosInstance.get(
     `/contragents?token=${token}&phone=${phone}`
   )
-  console.log(response.data)
-  return response.data.result
+
+  return response.data
 }

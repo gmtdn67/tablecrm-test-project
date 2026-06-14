@@ -29,6 +29,27 @@ export function StickySummaryWidget() {
       )
     }, [cart])
 
+    async function handleCreate(status: boolean) {
+      if (
+        !organization ||
+        !warehouse ||
+        !paybox ||
+        !contragent
+      ) {
+        return
+      }
+
+      await createOrder({
+        token,
+        cart,
+        organization,
+        warehouse,
+        paybox,
+        contragent,
+        status,
+      })
+  }
+
   return (
     <div
       className="
@@ -68,15 +89,7 @@ export function StickySummaryWidget() {
             className="w-30 cursor-pointer"
             disabled={isOrderInvalid}
             onClick={() =>
-              createOrder({
-                token,
-                cart,
-                organization,
-                warehouse,
-                paybox,
-                contragent,
-                status: false,
-              })
+              handleCreate(false)
             }
           >
             Создать
@@ -87,15 +100,7 @@ export function StickySummaryWidget() {
             variant="secondary"
             disabled={isOrderInvalid}
             onClick={() =>
-              createOrder({
-                token,
-                cart,
-                organization,
-                warehouse,
-                paybox,
-                contragent,
-                status: true,
-              })
+              handleCreate(true)
             }
           >
             Создать и провести
