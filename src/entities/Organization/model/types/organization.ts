@@ -1,5 +1,5 @@
 export type Organization = {
     id: number,
-    shortName: string,
+    short_name: string,
     inn: number
 }
