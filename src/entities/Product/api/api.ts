@@ -2,9 +2,8 @@ import { axiosInstance } from "@/shared/api/axios"
 
 export async function getNomenclatures(token: string) {
   const response = await axiosInstance.get(
-    `/nomenclatures?token=${token}`
+    `nomenclature?token=${token}`
   )
-  
-  console.log(response.data)
-  return response.data
+
+  return response.data.result
 }

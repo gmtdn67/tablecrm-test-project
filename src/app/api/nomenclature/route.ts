@@ -6,7 +6,7 @@ export async function GET(req: NextRequest) {
             req.nextUrl.searchParams.get("token")
 
         const response = await fetch(
-            `https://app.tablecrm.com/api/v1/nomenclatures/?token=${token}`
+            `https://app.tablecrm.com/api/v1/nomenclature?token=${token}`
         )
 
         const data = await response.json()
