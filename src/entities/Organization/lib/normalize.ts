@@ -6,7 +6,7 @@ export function normalizeOrganization(
     if (item) {
         return {
             id: item.id,
-            name: item.shortName,
+            name: item.short_name,
         }
 }
 }

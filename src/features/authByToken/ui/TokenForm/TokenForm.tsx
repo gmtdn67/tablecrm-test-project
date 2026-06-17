@@ -1,6 +1,4 @@
 "use client"
-
-import { preloadAppData } from "@/shared/lib/preloadAppData"
 import { Button } from "@/shared/ui/shadcn/button"
 import { Card, CardDescription, CardHeader } from "@/shared/ui/shadcn/card"
 import { Input } from "@/shared/ui/shadcn/input"
