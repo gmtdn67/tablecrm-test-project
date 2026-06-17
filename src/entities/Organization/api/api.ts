@@ -9,7 +9,7 @@ export async function getOrganizations(token: string) {
     return response.data.map(
       (item: Organization) => ({
         id: item.id,
-        name: item.short_name,
+        name: item.shortName,
       })
   )
 }

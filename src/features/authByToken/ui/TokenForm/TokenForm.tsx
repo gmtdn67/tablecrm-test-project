@@ -23,7 +23,6 @@ export function TokenForm() {
     async function connectByToken() {
         try {
             setIsLoading(true)
-            await preloadAppData(inputValue)
             setToken(inputValue)
             toast.success("Касса подключена")
         } catch (error) {

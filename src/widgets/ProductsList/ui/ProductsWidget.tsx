@@ -43,7 +43,6 @@ export function ProductsWidget() {
     isLoading,
   } = useProducts()
 
-  console.log(products)
 
   const addToCart =
     useOrderStore(
